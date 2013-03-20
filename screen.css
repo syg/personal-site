@@ -1,0 +1,200 @@
+@font-face {
+    font-family: 'Crimson';
+    src: url('fonts/crimson-roman.eot');
+    src: url('fonts/crimson-roman.eot?#iefix') format('embedded-opentype'),
+         url('fonts/crimson-roman.woff') format('woff'),
+         url('fonts/crimson-roman.ttf') format('truetype'),
+         url('fonts/crimson-roman.svg#CrimsonRoman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Crimson';
+    src: url('fonts/crimson-italic.eot');
+    src: url('fonts/crimson-italic.eot?#iefix') format('embedded-opentype'),
+         url('fonts/crimson-italic.woff') format('woff'),
+         url('fonts/crimson-italic.ttf') format('truetype'),
+         url('fonts/crimson-italic.svg#CrimsonItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@media only screen and (min-device-width: 480px) {
+    nav > a + a {
+        margin-left: 4em;
+    }
+
+    span#name {
+        font: 64px "Lato", serif;
+        margin-top: 100px;
+    }
+
+    section,nav {
+        font: 18px/1.35 "Crimson", serif;
+    }
+}
+
+@media only screen and (min-device-width: 800px) {
+    nav > a + a {
+        margin-left: 8em;
+    }
+
+    span#name {
+        font: 80px "Lato", serif;
+        margin-top: 200px;
+    }
+
+    section,nav {
+        font: 18px/1.35 "Crimson", serif;
+    }
+}
+
+body {
+    -webkit-text-size-adjust: none;
+    color: #444;
+    background-color: #ece8e8;
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+img {
+    border: none;
+}
+
+span#name {
+    text-transform: lowercase;
+    font-variant: small-caps;
+    display: block;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+img#seal {
+    float: left;
+    display: block;
+    padding-top: 1em;
+    padding-right: 1em;
+    height: 4em;
+    width: 4em;
+}
+
+img#in-heaven {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+img#on-earth {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+img#i-alone {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+img#am-revered {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+
+section > h1 {
+    color: #333;
+    font-size: 1.6em;
+    font-weight: normal;
+    margin-top: 0.55em;
+    margin-bottom: 0;
+}
+
+section > h1:before {
+    padding-right: 0.5em;
+    content: '❧';
+}
+
+article > h1 {
+    color: black;
+    font-size: 1.15em;
+    font-style: italic;
+    font-weight: normal;
+    margin: 0;
+}
+
+article > h2 {
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding-left: 1em;
+}
+
+ul {
+    list-style: square;
+    margin: 0;
+    padding-left: 1em;
+}
+
+p {
+    margin: 0;
+    text-align: justify;
+}
+
+p + p {
+    margin-top: 0.5em;
+}
+
+section {
+    display: block;
+    margin: 0 auto;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+nav {
+    display: block;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+a {
+    color: black;
+    outline: none;
+    font-style: italic;
+    text-decoration: none;
+    -moz-transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s
+}
+
+a:hover {
+    outline: none;
+    color: #0087ff;
+}
+
+a:active {
+    outline: none;
+    color: #0087ff;
+}
+
+#date {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2em;
+    font-size: small;
+    color: #ccc;
+}
+
+span.amp {
+    font-size: 1.5em;
+    font-weight: normal;
+    font-style: italic;
+    position: relative;
+    top: 0.1em;
+}
