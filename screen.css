@@ -30,8 +30,12 @@
         margin-top: 100px;
     }
 
-    section,nav {
+    section, nav, div#post {
         font: 18px/1.35 "Crimson", serif;
+    }
+
+    code {
+        font: 16px/1.35 "Inconsolata", monospace;
     }
 }
 
@@ -45,8 +49,12 @@
         margin-top: 200px;
     }
 
-    section,nav {
+    section, nav, div#post {
         font: 18px/1.35 "Crimson", serif;
+    }
+
+    code {
+        font: 16px/1.35 "Inconsolata", monospace;
     }
 }
 
@@ -80,30 +88,6 @@ img#seal {
     width: 4em;
 }
 
-img#in-heaven {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-}
-
-img#on-earth {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-}
-
-img#i-alone {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-}
-
-img#am-revered {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-}
-
 section > h1 {
     color: #333;
     font-size: 1.6em;
@@ -115,6 +99,15 @@ section > h1 {
 section > h1:before {
     padding-right: 0.5em;
     content: '❧';
+}
+
+div#post > h1 {
+    color: #333;
+    font-size: 1.6em;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 0.55em;
+    margin-bottom: 0.45em;
 }
 
 article > h1 {
@@ -197,4 +190,25 @@ span.amp {
     font-style: italic;
     position: relative;
     top: 0.1em;
+}
+
+div.sep {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    text-align: center;
+    color: #333;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    width: 80%;
+    border: 0;
+    border-top: 1px solid #999;
+    margin: 1em auto;
+    padding: 0;
+}
+
+div.highlight {
+    margin-left: 1.5em;
 }

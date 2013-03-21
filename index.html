@@ -1,62 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <title>Shu-yu Guo</title>
-    <link href="screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Lato:700' rel='stylesheet' type='text/css'>
-  </head>
-  <body>
-    <span id="name">Shu-yu Guo</span>
+---
+layout: default
+title: Shu-yu Guo
+---
 
-    <nav>
-      <a href="mailto:shu@rfrn.org">shu@rfrn.org</a>
-      <a href="CV.pdf">Curriculum Vitae</a>
-    </nav>
+<nav>
+  <a href="mailto:shu@rfrn.org">shu@rfrn.org</a>
+  <a href="CV.pdf">Curriculum Vitae</a>
+</nav>
 
-    <section id="intro">
-      <p><img id="seal" src="seal.svg" alt="seal">I do research at <a href="http://www.mozilla.org">Mozilla</a>.</p>
+<section id="posts">
+  <h1>Blog Posts</h1>
+  {% for post in site.posts %}
+  <article>
+    <h1><a href="{{ site.baseurl }}/{{ post.url }}">{{ post.title }}</a></h1>
+    <h2>{{ post.date | date: "%A, %B, %Y" }}</h2>
+  {% endfor %}
+</section>
 
-      <p>I'm implementing <a href="https://github.com/syg/iontrail/">parallel arrays</a> inside Firefox, hacking a ActionScript VM in JavaScript for <a href="https://github.com/mozilla/shumway">Shumway</a>, and hacking a bit on <a href="http://lljs.org/">LLJS</a> on the side.</p>
+<section id="pubs">
+  <h1>Drafts <span class="amp">&amp;</span> Publications</h1>
+  <article>
+    <h1>Fast and Precise Hybrid Type Inference for JavaScript</h1>
+    <h2>Hackett, Guo. PLDI 2012. <a href="drafts/ti.pdf">pdf</a></h2>
+  </article>
+  <article>
+    <h1>The Essence of Compiling with Traces</h1>
+    <h2>Guo, Palsberg. POPL 2011. <a href="papers/popl11.pdf">pdf</a> / <a href="papers/popl11-full.pdf">full</a></h2>
+  </article>
+  <article>
+    <h1>Lazy Contract Checking for Immutable Data Structures</h1>
+    <h2>Findler, Guo, Rogers. IFL 2007. <a href="papers/ifl07.pdf">pdf</a></h2>
+  </article>
+</section>
 
-      <p>I was a graduate student of computer science at <a href="http://www.ucla.edu">UCLA</a> studying programming languages and compilers under <a href="http://www.cs.ucla.edu/~palsberg/">Jens Palsberg</a>. I did my undergraduate studies in computer science and linguistics at the home of tortured intellectuals, the <a href="http://www.uchicago.edu">University of Chicago</a>.</p>
+<section id="writing">
+  <h1>Creative Writing</h1>
+  <article>
+    <h1>The Paperweight</h1>
+    <h2>Short story, 2011. <a href="writing/paperweight.html">html</a></h2>
+  </article>
+</section>
 
-      <p>I am interested in both programming languages and natural languages; in particular, modeling meaning.</p>
-    </section>
+<section id="about">
+  <div class="sep">* * *</div>
+  <p><img id="seal" src="seal.svg" alt="seal">I do research at <a href="http://www.mozilla.org">Mozilla</a>.</p>
 
-    <section id="research">
-      <h1>Research</h1>
-      <p>I'm currently thinking about the implmentation of and the implementing of lower-level software using JavaScript.</p>
-      <p>I looked into static analyses for JavaScript. Last thing was using a half-static half-dynamic type inference engine inside Firefox's tracer. Past endeavors include a <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=573569">one-pass parse-time SSA construction algorithm</a>.</p>
-      <p>I investigated proof techniques for correctness of dynamic compilation techniques, namely <a href="http://andreasgal.wordpress.com/2008/08/22/tracing-the-web">trace compilation</a>.</p>
-      <p>I worked on contracts for immutable data structures with <a href="http://www.eecs.northwestern.edu/~robby/">Robby Findler</a> in <a href="http://www.plt-scheme.org/">PLT Scheme</a>.</p>
-    </section>
-    <section id="pubs">
-      <h1>Drafts <span class="amp">&amp;</span> Publications</h1>
-      <article>
-        <h1>Fast and Precise Hybrid Type Inference for JavaScript</h1>
-        <h2>Hackett, Guo. PLDI 2012. <a href="drafts/ti.pdf">pdf</a></h2>
-      </article>
-      <article>
-        <h1>The Essence of Compiling with Traces</h1>
-        <h2>Guo, Palsberg. POPL 2011. <a href="papers/popl11.pdf">pdf</a> / <a href="papers/popl11-full.pdf">full</a></h2>
-      </article>
-      <article>
-        <h1>Lazy Contract Checking for Immutable Data Structures</h1>
-        <h2>Findler, Guo, Rogers. IFL 2007. <a href="papers/ifl07.pdf">pdf</a></h2>
-      </article>
-    </section>
+  <p>I work on <a href="https://github.com/syg/iontrail/">parallel arrays</a> inside Firefox, the ActionScript VM in JavaScript for <a href="https://github.com/mozilla/shumway">Shumway</a>, and a bit on <a href="http://lljs.org/">LLJS</a> on the side.</p>
 
-    <section id="writing">
-      <h1>Creative Writing</h1>
-      <article>
-        <h1>The Paperweight</h1>
-        <h2>Short story, 2011. <a href="writing/paperweight.html">html</a></h2>
-      </article>
-    </section>
-
-    <footer id="date">11-15-2012</footer>
-  </body>
-</html>
+  <p>I was a programming languages graduate student at <a href="http://www.ucla.edu">UCLA</a> under <a href="http://www.cs.ucla.edu/~palsberg/">Jens Palsberg</a>. I did my undergraduate studies in computer science and linguistics at the home of tortured intellectuals, the <a href="http://www.uchicago.edu">University of Chicago</a>.</p>
+</section>
