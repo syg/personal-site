@@ -12,40 +12,40 @@ title: Shu-yu Guo
   <h1>Blog Posts</h1>
   {% for post in site.posts %}
   <article>
-    <h1><a href="{{ site.baseurl }}/{{ post.url }}">{{ post.title }}</a></h1>
-    <h2>{{ post.date | date: "%A, %B, %Y" }}</h2>
+    <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+    <h2>{{ post.date | date: "%d %B, %Y" }}</h2>
   {% endfor %}
 </section>
 
 <section id="pubs">
   <h1>Drafts <span class="amp">&amp;</span> Publications</h1>
   <article>
-    <h1>Fast and Precise Hybrid Type Inference for JavaScript</h1>
-    <h2>Hackett, Guo. PLDI 2012. <a href="drafts/ti.pdf">pdf</a></h2>
+    <h1><a href="drafts/ti.pdf">Fast and Precise Hybrid Type Inference for JavaScript</a></h1>
+    <h2>Hackett, Guo. <span class="sc">PLDI</span> 2012. </h2>
   </article>
   <article>
-    <h1>The Essence of Compiling with Traces</h1>
-    <h2>Guo, Palsberg. POPL 2011. <a href="papers/popl11.pdf">pdf</a> / <a href="papers/popl11-full.pdf">full</a></h2>
+    <h1><a href="papers/popl11.pdf">The Essence of Compiling with Traces</a></h1>
+    <h2>Guo, Palsberg. <span class="sc">POPL</span> 2011. <a href="papers/popl11-full.pdf">full version with proofs</a></h2>
   </article>
   <article>
-    <h1>Lazy Contract Checking for Immutable Data Structures</h1>
-    <h2>Findler, Guo, Rogers. IFL 2007. <a href="papers/ifl07.pdf">pdf</a></h2>
+    <h1><a href="papers/ifl07.pdf">Lazy Contract Checking for Immutable Data Structures</a></h1>
+    <h2>Findler, Guo, Rogers. <span class="sc">IFL</span> 2007.</h2>
   </article>
 </section>
 
 <section id="writing">
   <h1>Creative Writing</h1>
   <article>
-    <h1>The Paperweight</h1>
-    <h2>Short story, 2011. <a href="writing/paperweight.html">html</a></h2>
+    <h1><a href="writing/paperweight.html">The Paperweight</a></h1>
+    <h2>Short story, 2011.</h2>
   </article>
 </section>
 
 <section id="about">
-  <div class="sep">* * *</div>
-  <p><img id="seal" src="seal.svg" alt="seal">I do research at <a href="http://www.mozilla.org">Mozilla</a>.</p>
+  <hr class="sep">
+  <p>I do research at <a href="http://www.mozilla.org">Mozilla</a>.</p>
 
   <p>I work on <a href="https://github.com/syg/iontrail/">parallel arrays</a> inside Firefox, the ActionScript VM in JavaScript for <a href="https://github.com/mozilla/shumway">Shumway</a>, and a bit on <a href="http://lljs.org/">LLJS</a> on the side.</p>
 
-  <p>I was a programming languages graduate student at <a href="http://www.ucla.edu">UCLA</a> under <a href="http://www.cs.ucla.edu/~palsberg/">Jens Palsberg</a>. I did my undergraduate studies in computer science and linguistics at the home of tortured intellectuals, the <a href="http://www.uchicago.edu">University of Chicago</a>.</p>
+  <p>I was a programming languages graduate student at <a href="http://www.ucla.edu">UCLA</a> under <a href="http://www.cs.ucla.edu/~palsberg/">Jens Palsberg</a>. I did my undergraduate studies in computer science and linguistics at the home of tortured intellectuals, the <a href="http://www.uchicago.edu">University of Chicago</a>.<img id="seal" src="seal.svg" alt="seal"></p>
 </section>

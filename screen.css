@@ -80,12 +80,10 @@ span#name {
 }
 
 img#seal {
-    float: left;
+    float: right;
     display: block;
-    padding-top: 1em;
-    padding-right: 1em;
-    height: 4em;
-    width: 4em;
+    height: 3em;
+    width: 3em;
 }
 
 section > h1 {
@@ -176,12 +174,19 @@ a:active {
 }
 
 #date {
+    clear: both;
+    font-family: 'Crimson', serif;
     display: block;
-    margin: 0 auto;
     text-align: center;
     margin-top: 2em;
+    margin-bottom: 2em;
     font-size: small;
     color: #ccc;
+}
+
+span.sc {
+  text-transform: lowercase;
+  font-variant: small-caps;
 }
 
 span.amp {
@@ -192,11 +197,12 @@ span.amp {
     top: 0.1em;
 }
 
-div.sep {
-    margin-top: 3em;
-    margin-bottom: 3em;
+hr.sep {
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
     text-align: center;
     color: #333;
+    width: 60%;
 }
 
 hr {
@@ -211,4 +217,32 @@ hr {
 
 div.highlight {
     margin-left: 1.5em;
+}
+
+span.button {
+    cursor: pointer;
+    text-transform: lowercase;
+    font-family: "Lato", serif;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: #ece8e8;
+    background-color: #444;
+    border: 1px solid #444;
+    border-radius: 3px;
+    padding: 0.4em 0.9em 0.4em 0.9em;
+    margin-right: 1em;
+}
+
+span.button:active {
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+div.measurement {
+    margin-left: 1.5em;
+}
+
+span.output {
+    font-size: 1.35em;
 }
