@@ -232,9 +232,14 @@ div.highlight {
     margin-left: 1.5em;
 }
 
-pre.highlight {
+pre.sparse {
     margin-left: 1.5em;
-    font: 16px/1.35 "Inconsolata", monospace;
+    font: 16px/1.1 "Inconsolata", monospace;
+}
+
+pre.dense {
+    margin-left: 1.5em;
+    font: 16px/1 "Inconsolata", monospace;
 }
 
 span.button {
