@@ -108,6 +108,20 @@ div#post > h1 {
     margin-bottom: 0.45em;
 }
 
+div#post > h2 {
+    color: #333;
+    font-size: 1.3em;
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 0.4em;
+    margin-bottom: 0.3em;
+}
+
+div#post > h2:before {
+    padding-right: 0.5em;
+    content: '❧';
+}
+
 article > h1 {
     color: black;
     font-size: 1.15em;
@@ -218,6 +232,11 @@ div.highlight {
     margin-left: 1.5em;
 }
 
+pre.highlight {
+    margin-left: 1.5em;
+    font: 16px/1.35 "Inconsolata", monospace;
+}
+
 span.button {
     cursor: pointer;
     text-transform: lowercase;
@@ -244,4 +263,8 @@ div.measurement {
 
 span.output {
     font-size: 1.35em;
+}
+
+.faded {
+    opacity: 0.05;
 }
