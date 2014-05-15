@@ -41,7 +41,7 @@ The rest of this post is a recounting of the implementation of [bug
 
 SpiderMonkey implements a well-designed [Debugger
 API](https://developer.mozilla.org/en-US/docs/Tools/Debugger-API) that allows
-programmer to implement JS debuggers in JS. It does so by reflecting engine
+the programmer to implement JS debuggers in JS. It does so by reflecting engine
 structures (e.g., frames, scripts, scopes) and making available hooks on those
 structures (e.g., `onStep` and `onPop` on a frame) to which the programmer can
 assign a plain JS function. To ensure that these callbacks are invoked, the
@@ -49,8 +49,8 @@ engine checks if there are hooks to be called at various points during
 execution.
 
 For example, suppose we set an `onStep` handler on the frame of call to
-`isEven`, the source of which is shown below. Ignore the travesty of `TWO`, it
-is a contrived example to demonstrate deoptimization below.
+`isEven`, the source of which is shown below. Ignore the travesty of `TWO`; the
+example is contrived to demonstrate deoptimization below in a later section.
 
 {% highlight js %}
 var TWO = 2;
@@ -269,10 +269,10 @@ given in the previous section to be closer to reality.
 The Baseline JIT compiles inline caches for most bytecode operations (for the
 unfamiliar, mraleph's [blog
 post](http://mrale.ph/blog/2012/06/03/explaining-js-vms-in-js-inline-caches.html)
-is an excellent tutorial on the topic). For calls to other JS functions,
-Baseline installs call ICs. These ICs initially start with a fallback path,
-and add new inline paths as it observes them. In Baseline parlance, these
-different paths are called "stubs" and have their own frame on the stack.
+is an excellent tutorial on the topic). For function calls, Baseline installs
+call ICs. These ICs initially start with a fallback path, and add new inline
+paths as it observes them. In Baseline parlance, these different paths are
+called "stubs" and have their own frame on the stack.
 
 Continuing the existing example, the expanded Baseline frames for a call into
 `isEven(4)` are rendered below.
@@ -292,7 +292,7 @@ Continuing the existing example, the expanded Baseline frames for a call into
 +--------------\----------------------------------+   |   |        |           ...           |
 | Callee       /  isEven                          |   |   |        +-------------------------+
 +--------------\----------------------------------+   |   |        | 009/0xa4c: CallIC Entry | 0xa6a
-| Descr        /  BaselineStub                    |   |   |   /--->|      └ Stub             |--\
+| Descr        /  BaselineStub                    |   |   |   /--->|            └ Stub       |--\
 +--------------\----------------------------------+   |   |   |    +-------------------------+  |
 | ReturnAddr   /  into CallIC ~> toplevel:2       |   |   |   |    |           ...           |  |
 +==============\==================================+   |   |   |    +=========================+  |
@@ -464,9 +464,8 @@ the machine code location in the recompiled script analogous to the old
 
 To patch `StubPtr`, we must clone the old stub. Since IC stubs are added
 just-in-time during execution, the recompiled Baseline code, having never been
-executed, has no stubs in its IC entries. Since the machine stub code is
-shared and still live, we point the cloned stub to the same code that the old
-stub pointed to.
+executed, has no stubs in its IC entries. The shared stub code being still
+alive, we point the cloned stub to the same code that the old stub pointed to.
 
 Putting this together, we arrive at a picture that is almost exactly the same
 as the original, except that we now return into Baseline code that knows to
@@ -488,7 +487,7 @@ call the `Debugger` hooks.
 | Callee       /  isEven                          |   |   |        |           ...          |
 +--------------\----------------------------------+   |   |        +------------------------+
 | Descr        /  BaselineStub                    |   |   |        | 009/0xe56: CallIC Enty | 0xe92
-+--------------\----------------------------------+   |   |   /--->|      └ Stub            |--\
++--------------\----------------------------------+   |   |   /--->|            └ Stub      |--\
 | ReturnAddr   /  into CallIC ~> toplevel:2       |   |   |   |    +------------------------+  |
 +==============\==================================+   |   |   |    |           ...          |  |
 | PrevFramePtr /                                  |-------/   |    +========================+  |
@@ -562,3 +561,4 @@ imagination, will hopefully follow.
 I would like to thank [Jim Blandy](http://www.red-bean.com/~jimb/) for helpful
 discussions and encouragement, and [Jan de Mooij](http://www.jandemooij.nl/)
 for righteous code reviews.
+<img id="seal" src="{{ site.baseurl }}/seal.svg" alt="seal">
