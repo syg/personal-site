@@ -17,8 +17,8 @@ Microsoft, and Mozilla) ship optimizing JIT compilers in their JavaScript
 engines for performance. How, then, do we effectively debug JavaScript?
 
 Firefox's approach has been to disable the JIT when a JS script is being
-debugged. This makes for poor user experience. The programmer must _a priori_
-decide that the current session will be a debugging session. But suppose an
+debugged. This makes for poor user experience. The programmer must wait for
+the JS execution stack to be empty to turn on debugging. But suppose an
 errant scenario arises: the web app encounters a corner case which results in
 an infinite loop. In the current world, the programmer has no recourse but try
 to reproduce the corner case (possibly intermittent!) with debugging mode
@@ -561,4 +561,8 @@ imagination, will hopefully follow.
 I would like to thank [Jim Blandy](http://www.red-bean.com/~jimb/) for helpful
 discussions and encouragement, and [Jan de Mooij](http://www.jandemooij.nl/)
 for righteous code reviews.
+
+## Edits
+
+1. Corrected that turning on debug mode only requires the JS stack to be empty and is not technically an _a priori_ decision. (From Jim)
 <img id="seal" src="{{ site.baseurl }}/seal.svg" alt="seal">

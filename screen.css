@@ -119,6 +119,7 @@ div#post > h2 {
 
 div#post > h2:before {
     padding-right: 0.5em;
+    font-style: normal;
     content: '❧';
 }
 
