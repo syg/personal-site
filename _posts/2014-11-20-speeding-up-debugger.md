@@ -97,7 +97,7 @@ requirements are thus made surgical:
 
 * `Debugger.Frame` hooks and are all handled identically. Currently, having a
   `Debugger.Frame` reflection constructed ensures the referent frame is
-  observable, discarding its Ion code and recompiling any on-stack Baseline
+  observable, invalidating its Ion code and recompiling any on-stack Baseline
   frames. Since those hooks are all set via a `Debugger.Frame` instance, the
   underlying frame must already be observable.
 
