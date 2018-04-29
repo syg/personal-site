@@ -1,22 +1,44 @@
 @font-face {
     font-family: 'Crimson';
-    src: url('fonts/crimson-roman.eot');
-    src: url('fonts/crimson-roman.eot?#iefix') format('embedded-opentype'),
-         url('fonts/crimson-roman.woff') format('woff'),
-         url('fonts/crimson-roman.ttf') format('truetype'),
-         url('fonts/crimson-roman.svg#CrimsonRoman') format('svg');
+    src: url('fonts/crimson-roman-webfont.eot');
+    src: url('fonts/crimson-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/crimson-roman-webfont.woff2') format('woff2'),
+         url('fonts/crimson-roman-webfont.woff') format('woff'),
+         url('fonts/crimson-roman-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Crimson';
-    src: url('fonts/crimson-italic.eot');
-    src: url('fonts/crimson-italic.eot?#iefix') format('embedded-opentype'),
-         url('fonts/crimson-italic.woff') format('woff'),
-         url('fonts/crimson-italic.ttf') format('truetype'),
-         url('fonts/crimson-italic.svg#CrimsonItalic') format('svg');
+    src: url('fonts/crimson-italic-webfont.eot');
+    src: url('fonts/crimson-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/crimson-italic-webfont.woff2') format('woff2'),
+         url('fonts/crimson-italic-webfont.woff') format('woff'),
+         url('fonts/crimson-italic-webfont.ttf') format('truetype');
     font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Crimson';
+    src: url('fonts/crimson-semibold-webfont.eot');
+    src: url('fonts/crimson-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/crimson-semibold-webfont.woff2') format('woff2'),
+         url('fonts/crimson-semibold-webfont.woff') format('woff'),
+         url('fonts/crimson-semibold-webfont.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Crimson';
+    src: url('fonts/crimson-semibolditalic-webfont.eot');
+    src: url('fonts/crimson-semibolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/crimson-semibolditalic-webfont.woff2') format('woff2'),
+         url('fonts/crimson-semibolditalic-webfont.woff') format('woff'),
+         url('fonts/crimson-semibolditalic-webfont.ttf') format('truetype');
+    font-weight: 600;
     font-style: italic;
 }
 
@@ -31,13 +53,17 @@
     }
 
     section, nav, div#post {
-        font: 18px/1.35 "Crimson", serif;
+        font: 20px/1.5 "Crimson", serif;
         margin-left: 1em;
         margin-right: 1em;
+        -webkit-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        -moz-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        -o-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
     }
 
     code {
-        font: 16px/1.35 "Inconsolata", monospace;
+        font: 16px/1.35 "Cousine", monospace;
     }
 }
 
@@ -52,11 +78,15 @@
     }
 
     section, nav, div#post {
-        font: 18px/1.35 "Crimson", serif;
+        font: 20px/1.5 "Crimson", serif;
+        -webkit-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        -moz-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        -o-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
     }
 
     code {
-        font: 16px/1.35 "Inconsolata", monospace;
+        font: 16px/1.35 "Cousine", monospace;
     }
 }
 
@@ -152,6 +182,10 @@ li {
 
 p {
     margin: 0;
+    -webkit-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+    -moz-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+    -o-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+    font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
 }
 
 p + p {
@@ -200,7 +234,10 @@ a:active {
     text-align: center;
     margin-top: 2em;
     margin-bottom: 2em;
-    font-size: small;
+    -webkit-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+    -moz-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+    -o-font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
+    font-feature-settings: 'liga' 1, 'onum' 1, 'kern' 1;
     color: #ccc;
 }
 
@@ -235,18 +272,27 @@ hr {
     padding: 0;
 }
 
+dt {
+    margin-left: 1em;
+    font-weight: 600;
+}
+
+dd + dt {
+    margin-top: 0.5em;
+}
+
 div.highlight {
     margin-left: 1.5em;
 }
 
 pre.sparse {
     margin-left: 1.5em;
-    font: 16px/1.1 "Inconsolata", monospace;
+    font: 16px/1.1 "Cousine", monospace;
 }
 
 pre.dense {
     margin-left: 1.5em;
-    font: 16px/1 "Inconsolata", monospace;
+    font: 16px/1 "Cousine", monospace;
 }
 
 span.button {
@@ -279,4 +325,18 @@ span.output {
 
 .faded {
     opacity: 0.05;
+}
+
+.onum {
+    -webkit-font-feature-settings: 'onum' 1;
+    -moz-font-feature-settings: 'onum' 1;
+    -o-font-feature-settings: 'onum' 1;
+    font-feature-settings: 'onum' 1;
+}
+
+.nnum {
+    -webkit-font-feature-settings: 'onum' 0;
+    -moz-font-feature-settings: 'onum' 0;
+    -o-font-feature-settings: 'onum' 0;
+    font-feature-settings: 'onum' 0;
 }

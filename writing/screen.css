@@ -1,5 +1,5 @@
 body {
-    font: 1.25em/1.35 "Crimson Text", serif;
+    font: 1.25em/1.35 "Fanwood Text", serif;
     color: #444;
     background-color: #ece8e8;
     margin: 0 auto;
@@ -13,7 +13,7 @@ header {
 }
 
 header > h1 {
-    font: 2em "Special Elite", serif;
+    font: 2em "Old Standard TT", serif;
 }
 
 p {
@@ -35,5 +35,4 @@ p + p {
 
 .sc {
     font-variant: small-caps;
-    font-weight: 600;
 }

@@ -4,8 +4,8 @@ title: Shu-yu Guo
 ---
 
 <nav>
-  <a href="mailto:shu@rfrn.org">shu@rfrn.org</a>
-  <a href="CV.pdf">Curriculum Vitae</a>
+  <a href="mailto:shu@rfrn.org">Email</a>
+  <a href="https://twitter.com/_shu">Twitter</a>
 </nav>
 
 <section id="posts">
@@ -13,37 +13,59 @@ title: Shu-yu Guo
   {% for post in site.posts %}
   <article>
     <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-    <h2>{{ post.date | date: "%d %B, %Y" }}</h2>
+    <h2 class="onum">{{ post.date | date: "%-d %B, %Y" }}</h2>
   {% endfor %}
 </section>
 
 <section id="pubs">
   <h1>Drafts <span class="amp">&amp;</span> Publications</h1>
   <article>
+    <h1><a href="papers/tacas18.pdf">EMME: a formal tool for ECMAScript Memory Model Evaluation</a></h1>
+    <h2 class="onum">Mattarei, Barrett, Guo, Nelson, Smith, Bastien. <span class="sc">TACAS</span> 2018. </h2>
+  </article>
+  <article>
+    <h1><a href="papers/ecoop15.pdf">Optimization Coaching for JavaScript</a></h1>
+    <h2 class="onum">St-Amour, Guo. <span class="sc">ECOOP</span> 2015. </h2>
+  </article>
+  <article>
     <h1><a href="drafts/ti.pdf">Fast and Precise Hybrid Type Inference for JavaScript</a></h1>
-    <h2>Hackett, Guo. <span class="sc">PLDI</span> 2012. </h2>
+    <h2 class="onum">Hackett, Guo. <span class="sc">PLDI</span> 2012. </h2>
   </article>
   <article>
     <h1><a href="papers/popl11.pdf">The Essence of Compiling with Traces</a></h1>
-    <h2>Guo, Palsberg. <span class="sc">POPL</span> 2011. <a href="papers/popl11-full.pdf">full version with proofs</a></h2>
+    <h2 class="onum">Guo, Palsberg. <span class="sc">POPL</span> 2011. <a href="papers/popl11-full.pdf">full version with proofs</a></h2>
   </article>
   <article>
     <h1><a href="papers/ifl07.pdf">Lazy Contract Checking for Immutable Data Structures</a></h1>
-    <h2>Findler, Guo, Rogers. <span class="sc">IFL</span> 2007.</h2>
+    <h2 class="onum">Findler, Guo, Rogers. <span class="sc">IFL</span> 2007.</h2>
   </article>
 </section>
 
 <section id="writing">
   <h1>Creative Writing</h1>
   <article>
+    <h1><a href="writing/i-meant-you-should-enjoy-yourself.html">I Meant You Should Enjoy Yourself</a></h1>
+    <h2 class="onum">Short story, 2015.</h2>
+  </article>
+
+  <article>
+    <h1><a href="writing/sussex.html">Sussex</a></h1>
+    <h2 class="onum">Short story, 2015.</h2>
+  </article>
+
+  <article>
     <h1><a href="writing/paperweight.html">The Paperweight</a></h1>
-    <h2>Short story, 2011.</h2>
+    <h2 class="onum">Short story, 2011.</h2>
   </article>
 </section>
 
 <section id="about">
   <hr class="sep">
-  <p>I work at <a href="http://www.mozilla.org">Mozilla</a> Research.</p>
+  <p>I am mostly known for my work on JavaScript and participation in <a class="nnum" href="https://github.com/tc39">TC39</a>, the JavaScript standards committee.</p>
+
+  <p>I work at <a href="https://www.bloomberg.com">Bloomberg</a>. I worked at <a href="https://www.mozilla.org">Mozilla</a>, First in Research, then led JS language work on SpiderMonkey.</p>
 
   <p>I was a programming languages graduate student at <a href="http://www.ucla.edu">UCLA</a> under <a href="http://www.cs.ucla.edu/~palsberg/">Jens Palsberg</a>. I did my undergraduate studies in computer science (under <a href="http://www.eecs.northwestern.edu/~robby/">Robby Findler</a>) and linguistics at the home for tortured intellectuals, the <a href="http://www.uchicago.edu">University of Chicago</a>.<img id="seal" src="seal.svg" alt="seal"></p>
+
+  <p>Here is my <a href="CV.pdf">CV</a>.</p>
 </section>
