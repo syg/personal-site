@@ -1,6 +1,6 @@
 .hll { background-color: #ffffcc }
 .c { font-style: italic } /* Comment */
-.err { border: 1px solid #FF0000 } /* Error */
+.err { } /* Error */
 .k { font-weight: bold } /* Keyword */
 .cm { font-style: italic } /* Comment.Multiline */
 .c1 { font-style: italic } /* Comment.Single */

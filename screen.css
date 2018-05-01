@@ -65,9 +65,10 @@
     code {
         font: 16px/1.35 "Cousine", monospace;
     }
+
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1066px) {
     nav > a + a {
         margin-left: 8em;
     }
@@ -88,6 +89,10 @@
     code {
         font: 16px/1.35 "Cousine", monospace;
     }
+
+    body#post {
+        max-width: 75%;
+    }
 }
 
 body {
@@ -95,8 +100,13 @@ body {
     color: #444;
     background-color: #ece8e8;
     position: relative;
-    max-width: 800px;
     margin: 0 auto;
+}
+
+@media (max-width: 1066px) {
+    body#post {
+        max-width: 800px;
+    }
 }
 
 img {
@@ -172,8 +182,7 @@ article > h2 {
 
 ul {
     list-style: square;
-    margin: 0;
-    padding-left: 1.25em;
+    margin-left: 0 1.5em;
 }
 
 li {
@@ -321,6 +330,25 @@ div.measurement {
 
 span.output {
     font-size: 1.35em;
+}
+
+table {
+    margin: 1em 1.5em;
+    border-collapse: collapse;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e3e0e0;
+}
+
+thead th {
+    padding: 0.75ex 2ex;
+}
+
+tbody td {
+    padding: 0.5ex 2ex;
 }
 
 .faded {
