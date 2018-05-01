@@ -77,7 +77,7 @@ new Ex1;
 * * *
 
 <a class="permanchor"></a>
-For subclasses, `this` is throws `ReferenceError` if touched until `super()` is called.<sup><a href="#tdz" id="tdz-use">(*)</a></sup> So, public instance fields are added when `super()` returns.
+For subclasses, `this` throws `ReferenceError` if touched until `super()` is called.<sup><a href="#tdz" id="tdz-use">(*)</a></sup> So, public instance fields are added when `super()` returns.
 
 {% highlight js %}
 class Ex2_Base {
@@ -562,7 +562,7 @@ new Ex23;
 <a class="permanchor"></a>
 Field initializers are run as fields are added, in declaration order, and this order is observable by the initializers. `#privateField` is `false` in the following as `publicField` has has not been added yet when evaluating `#privateField`'s initializer. There is also no error when initializing `publicField` with `this.#privateField`, owing to its coming after `#privateField`.
 
-These initializers are specified as methods that return the result of the initializer expressions. The methods need not be reified in implementation, but this fiction of specification informs the values of `this`. In instance field initializers, `this` is the object under construction. By the time the instance field initializer runs, `this` is out of TDZ.
+These initializers are specified as methods that return the result of the initializer expressions. The methods need not be reified in implementation, but this fiction of specification informs the values of `this`. In instance field initializers, `this` is the object under construction. By the time the instance field initializer runs, `this` is accessible.
 
 {% highlight js %}
 class Ex24 {
