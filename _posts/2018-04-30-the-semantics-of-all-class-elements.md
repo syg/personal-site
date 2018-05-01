@@ -137,22 +137,22 @@ new Ex3_ReturnTrickSub;
 Public field names may be computed, like properties. They are evaluated once per class evaluation.
 
 {% highlight js %}
-let Ex4_count = 0;
+let count = 0;
 function makeEx4(sym) {
   return class Ex4 {
-    [(Ex4_count++, sym)];
+    [(count++, sym)];
   };
 }
 
-let Ex4_key = Symbol("key");
-let Ex4 = makeEx4(Ex4_key);
-assert(Ex4_count === 0);
+let key = Symbol("key");
+let Ex4 = makeEx4(key);
+assert(count === 0);
 let ex4a = new Ex4;
-assert(ex4a.hasOwnProperty(Ex4_key), true);
-assert(Ex4_count === 1);
+assert(ex4a.hasOwnProperty(key), true);
+assert(count === 1);
 let ex4b = new Ex4;
-assert(ex4b.hasOwnProperty(Ex4_key), true);
-assert(Ex4_count === 1);
+assert(ex4b.hasOwnProperty(key), true);
+assert(count === 1);
 {% endhighlight %}
 
 ### Public instance methods
