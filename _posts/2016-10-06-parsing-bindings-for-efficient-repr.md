@@ -310,4 +310,4 @@ may be stored on the stack frame, and those that are closed over must be stored
 on the environment. Dynamic constructs like `eval` forces all
 storage to be on the environment. I hope the lesson extends to runtimes of
 other dynamic languages for which parsing time is part of the total execution
-time.
+time.<img id="seal" src="{{ site.baseurl }}/seal.svg" alt="seal">

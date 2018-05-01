@@ -106,4 +106,4 @@ requirements are thus made surgical:
 
 ## Conclusion
 
-Debugger is faster.
+Debugger is faster.<img id="seal" src="{{ site.baseurl }}/seal.svg" alt="seal">

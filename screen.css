@@ -65,7 +65,6 @@
     code {
         font: 16px/1.35 "Cousine", monospace;
     }
-
 }
 
 @media (min-width: 1066px) {
@@ -93,6 +92,11 @@
     body#post {
         max-width: 75%;
     }
+
+    a.permanchor {
+        position: absolute;
+        left: -0.25em;
+    }
 }
 
 body {
@@ -106,6 +110,11 @@ body {
 @media (max-width: 1066px) {
     body#post {
         max-width: 800px;
+    }
+
+    a.permanchor {
+        float: left;
+        padding-right: 0.25em;
     }
 }
 
@@ -226,6 +235,10 @@ a {
     transition: color 0.3s
 }
 
+a.permanchor:before {
+    content: '§';
+}
+
 a:hover {
     outline: none;
     color: #0087ff;
@@ -295,13 +308,28 @@ div.highlight {
 }
 
 pre.sparse {
+    margin-top: 16px;
+    margin-bottom: 16px;
     margin-left: 1.5em;
     font: 16px/1.1 "Cousine", monospace;
 }
 
 pre.dense {
+    margin-top: 16px;
+    margin-bottom: 16px;
     margin-left: 1.5em;
     font: 16px/1 "Cousine", monospace;
+}
+
+figure {
+    background-color: #e3e0e0;
+    margin: 0.5em 0;
+    padding: 0.5em 40px;
+}
+
+pre {
+    margin: 0;
+    font: 16px/1.5 "Cousine", monospace;
 }
 
 span.button {
