@@ -554,7 +554,7 @@ The first use of debug mode OSR is [bug
 versions of Firefox.
 
 Other useful features, which I cannot list now for my own failure of
-imagination, will hopefully follow.
+imagination, will hopefully follow.<img id="seal" src="{{ site.baseurl }}/seal.svg" alt="seal">
 
 ## Acknowledgments
 
@@ -565,4 +565,3 @@ for righteous code reviews.
 ## Edits
 
 1. Corrected that turning on debug mode only requires the JS stack to be empty and is not technically an _a priori_ decision. (From Jim)
-<img id="seal" src="{{ site.baseurl }}/seal.svg" alt="seal">

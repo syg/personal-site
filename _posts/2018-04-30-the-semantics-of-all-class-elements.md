@@ -6,7 +6,7 @@ title: The Semantics of All JS Class Elements
 {{ page.title }}
 ================
 
-This article summarizes the current and proposed class fields and methods semantics. With the exception of static private fields and methods at the time of writing, all the described semantics enjoy current <span class="nnum">TC39</span> consensus.
+This article summarizes the current and proposed class fields and methods semantics. With the exception of private static fields and methods at the time of writing, all the described semantics enjoy current <span class="nnum">TC39</span> consensus.
 
 The table of proposed features is as follows. The full feature set is the product of the columns.
 
@@ -14,6 +14,32 @@ The table of proposed features is as follows. The full feature set is the produc
 |------------|-----------|---------------|
 | Public     | Instance  | Field         |
 | Private    | Static    | Method        |
+
+<table class="narrow">
+<tbody>
+<tr>
+<td rowspan="2" style="font-weight: bold">Visibility</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>Private</td>
+</tr>
+<tr>
+<td rowspan="2" style="font-weight: bold">Placement</td>
+<td>Instance</td>
+</tr>
+<tr>
+<td>Static</td>
+</tr>
+<tr>
+<td rowspan="2" style="font-weight: bold">Class Element</td>
+<td>Field</td>
+</tr>
+<tr>
+<td>Method</td>
+</tr>
+</tbody>
+</table>
 
 I will describe the semantics of each column in detail, as well as the consequences of their combinations with each other as and with existing JS language features.
 
@@ -45,7 +71,7 @@ A **static** element is accessed on class constructors.
 
 A **field** is state associated with a class that has a blessed declarative syntax. An instance field is per-instance state. A static field is per-class constructor state.
 
-A **method** is some behavior associated with a class that has a blessed declarative syntax. Both instance and static method have one identity per-class evaluation. Instance methods are on the prototype, and static methods are on the class constructor.
+A **method** is some behavior associated with a class that has a blessed declarative syntax. Both instance and static methods have one identity per-class evaluation. Instance methods are on the prototype, and static methods are on the class constructor.
 
 ## Let's Make the Semantics Concrete with Examples
 
@@ -58,6 +84,7 @@ Classes may declare public fields accessible as properties on instances.
 <a class="permanchor"></a>
 Public instance fields are properties added by `Object.defineProperty`. They are added at construction time of the object for the base class, before the constructor body runs.
 
+<div class="wide">
 {% highlight js %}
 class Ex1 {
   publicField;
@@ -73,6 +100,28 @@ class Ex1 {
 
 new Ex1;
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex1 {
+  publicField;
+
+  constructor() {
+    let desc = Object.getOwnPropertyDescriptor(
+      this,
+      "publicField"
+    );
+    assert(desc.value === undefined);
+    assert(desc.writable);
+    assert(desc.enumerable);
+    assert(desc.configurable);
+  }
+}
+
+new Ex1;
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -148,31 +197,50 @@ let key = Symbol("key");
 let Ex4 = makeEx4(key);
 assert(count === 0);
 let ex4a = new Ex4;
-assert(ex4a.hasOwnProperty(key), true);
+assert(ex4a.hasOwnProperty(key) === true);
 assert(count === 1);
 let ex4b = new Ex4;
-assert(ex4b.hasOwnProperty(key), true);
+assert(ex4b.hasOwnProperty(key) === true);
 assert(count === 1);
 {% endhighlight %}
 
 ### Public instance methods
 
-Classes may declare public methods accessible on the instances via the prototype.
+Classes may declare public methods accessible on instances via the prototype.
 
 <a class="permanchor"></a>
 Public instance methods are added to the class prototype with `Object.defineProperty` at class evaluation time. They are writable, non-enumerable, and configurable.
 
+<div class="wide">
 {% highlight js %}
 class Ex5 {
   publicMethod() { return 42; }
 }
 
-let desc = Object.getOwnPropertyDescriptor(Ex5.prototype, "publicMethod");
+let desc =  Object.getOwnPropertyDescriptor(Ex5.prototype, "publicMethod");
 assert(desc.value === Ex5.prototype.publicMethod);
 assert(desc.writable);
 assert(!desc.enumerable);
 assert(desc.configurable);
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex5 {
+  publicMethod() { return 42; }
+}
+
+let desc =  Object.getOwnPropertyDescriptor(
+  Ex5.prototype,
+  "publicMethod"
+);
+assert(desc.value === Ex5.prototype.publicMethod);
+assert(desc.writable);
+assert(!desc.enumerable);
+assert(desc.configurable);
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -192,6 +260,7 @@ class Ex6 {
 <a class="permanchor"></a>
 Getters and setters are possible as well. There are no generator, async, or async generator getter and setter forms.
 
+<div class="wide">
 {% highlight js %}
 class Ex7 {
   get accessorPublicField() { return 42; }
@@ -203,6 +272,24 @@ assert(desc.value === undefined);
 assert(!desc.enumerable);
 assert(desc.configurable);
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex7 {
+  get accessorPublicField() { return 42; }
+  set accessorPublicField(x) { }
+}
+
+let desc = Object.getOwnPropertyDescriptor(
+  Ex7.prototype,
+  "accessorPublicField"
+);
+assert(desc.value === undefined);
+assert(!desc.enumerable);
+assert(desc.configurable);
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -296,7 +383,7 @@ class Ex11_Outer {
       }
     }
 
-    assert((new Ex11_Inner).privateFieldValue() == 42);
+    assert((new Ex11_Inner).privateFieldValue() === 42);
     assert(this.#privateField === undefined);
   }
 }
@@ -334,9 +421,10 @@ class Ex13 {
 }
 
 let ex13 = new Ex13;
+let onProto = Object.create(ex13);
 assertThrows(() => ex13.getField.call({}), TypeError);
 assertThrows(() => ex13.setField.call({}, 42), TypeError);
-assertThrows(() => ex13.getField.call(Object.create(c)), TypeError);
+assertThrows(() => ex13.getField.call(onProto), TypeError);
 {% endhighlight %}
 
 * * *
@@ -425,7 +513,7 @@ assertThrows(() => ex17a.getField.call(ex17b), TypeError);
 assertThrows(() => ex17b.getField.call(ex17a), TypeError);
 {% endhighlight %}
 
-Finally, note that there is currently no shorthand notation for accessing `#` names. Their access require a receiver.
+Finally, note that there is currently no shorthand notation for accessing `#` names. Their access requires a receiver.
 
 ### Private instance methods
 
@@ -434,6 +522,7 @@ Private instance methods are analogous to public instance methods. Their access 
 <a class="permanchor"></a>
 These methods are specified as non-writable private fields of class instances. Like private instance fields, they are added at construction time for the base classes and after `super()` returns for subclasses.
 
+<div class="wide">
 {% highlight js %}
 class Ex18 {
   #privateMethod() { return 42; }
@@ -446,6 +535,23 @@ class Ex18 {
 
 new Ex18;
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex18 {
+  #privateMethod() { return 42; }
+
+  constructor() {
+    assert(this.#privateMethod() === 42);
+    assertThrows(() => this.#privateMethod = null,
+                 TypeError);
+  }
+}
+
+new Ex18;
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -465,7 +571,7 @@ class Ex19 {
 <a class="permanchor"></a>
 Getters and setters are possible as well. There are no generator, async, or async generator getter and setter forms for private instance methods.
 
-Private fields are specified as a per-instance list of map of `#` names to property descriptors. This preserves the symmetry of expressible forms with public instance methods, as well as enforce the restrictions that come with private fields.
+Private methods are specified as a per-instance list of map of `#` names to property descriptors. This preserves the symmetry of expressible forms with public instance methods, as well as enforce the restrictions that come with private fields.
 
 {% highlight js %}
 class Ex20 {
@@ -474,7 +580,7 @@ class Ex20 {
 
   constructor() {
     assert(this.#accessorPrivateField === 42);
-    this.#accessorPrivateField = "hmm";
+    this.#accessorPrivateField = "ignored";
   }
 }
 
@@ -492,7 +598,7 @@ class Ex21 {
   #privateMethod() { }
 
   constructor() {
-    if (exfiltrated == undefined) {
+    if (exfiltrated === undefined) {
       exfiltrated = this.#privateMethod;
     }
     assert(exfiltrated === this.#privateMethod);
@@ -505,7 +611,7 @@ new Ex21;
 * * *
 
 <a class="permanchor"></a>
-In private instance methods, `super` and `this` follow the same semantics as those in public instance methods. Since private fields and methods are not added to the prototype, `#privateMethod()` throws below. Similarly, when an object of incorrect provenance is passed as the receiver to an instance private method, the private field lookup throws.
+In private instance methods, `super` and `this` follow the same semantics as those in public instance methods. Since private fields and methods are not added to the prototype, `#privateMethod()` throws below. Similarly, when an object of incompatible provenance is passed as the receiver to an instance private method, the private field lookup throws.
 
 {% highlight js %}
 class Ex22_Base {
@@ -630,7 +736,7 @@ assert((new Ex27).publicField === undefined);
 * * *
 
 <a class="permanchor"></a>
-In static methods, `super` references the superclass's prototype in instance field initializers.
+As in instance methods, `super` references the superclass's prototype in instance field initializers.
 
 {% highlight js %}
 class Ex28_Base {
@@ -677,17 +783,36 @@ Classes may declare public static fields, which are accessible as properties on 
 <a class="permanchor"></a>
 Public static fields are added to the class constructor with `Object.defineProperty` at class evaluation time. Their semantics are otherwise identical to public instance fields.
 
+<div class="wide">
 {% highlight js %}
 class Ex31 {
-  static STATIC_PUBLIC_FIELD;
+  static PUBLIC_STATIC_FIELD;
 }
 
-let desc = Object.getOwnPropertyDescriptor(Ex31, "STATIC_PUBLIC_FIELD");
+let desc = Object.getOwnPropertyDescriptor(Ex31, "PUBLIC_STATIC_FIELD");
 assert(desc.value === undefined);
 assert(desc.writable);
 assert(desc.enumerable);
 assert(desc.configurable);
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex31 {
+  static PUBLIC_STATIC_FIELD;
+}
+
+let desc = Object.getOwnPropertyDescriptor(
+  Ex31,
+  "PUBLIC_STATIC_FIELD"
+);
+assert(desc.value === undefined);
+assert(desc.writable);
+assert(desc.enumerable);
+assert(desc.configurable);
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -696,15 +821,15 @@ Public static fields are only initialized on the class in which they are defined
 
 {% highlight js %}
 class Ex32_Base {
-  static BASE_STATIC_PUBLIC_FIELD;
+  static BASE_PUBLIC_STATIC_FIELD;
 }
 
 class Ex32_Sub extends Ex32_Base {
-  static SUB_STATIC_PUBLIC_FIELD;
+  static SUB_PUBLIC_STATIC_FIELD;
 }
 
-assert(Ex32_Base.hasOwnProperty("BASE_STATIC_PUBLIC_FIELD"));
-assert(Ex32_Sub.hasOwnProperty("SUB_STATIC_PUBLIC_FIELD"));
+assert(Ex32_Base.hasOwnProperty("BASE_PUBLIC_STATIC_FIELD"));
+assert(Ex32_Sub.hasOwnProperty("SUB_PUBLIC_STATIC_FIELD"));
 assert(Object.getPrototypeOf(Ex32_Sub) === Ex32_Base);
 {% endhighlight %}
 
@@ -717,17 +842,36 @@ These methods are added to the class constructor with `Object.defineProperty` at
 
 Also like public instance methods, generator function, async function, async generator function, getter, and setter forms are accepted.
 
+<div class="wide">
 {% highlight js %}
 class Ex33 {
-  static staticPublicMethod() { return 42; }
+  static publicStaticMethod() { return 42; }
 }
 
-let desc = Object.getOwnPropertyDescriptor(Ex33, "staticPublicMethod");
+let desc = Object.getOwnPropertyDescriptor(Ex33, "publicStaticMethod");
 assert(desc.value === Ex33.publicMethod);
 assert(desc.writable);
 assert(!desc.enumerable);
 assert(desc.configurable);
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex33 {
+  static publicStaticMethod() { return 42; }
+}
+
+let desc = Object.getOwnPropertyDescriptor(
+  Ex33,
+  "publicStaticMethod"
+);
+assert(desc.value === Ex33.publicMethod);
+assert(desc.writable);
+assert(!desc.enumerable);
+assert(desc.configurable);
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -736,16 +880,16 @@ In static methods, `super` references the superclass constructor, and the superc
 
 {% highlight js %}
 class Ex34_Base {
-  static baseStaticPublicMethod() { return 42; }
+  static basePublicStaticMethod() { return 42; }
 }
 
-class Ex34Sub extends Ex34_Base {
-  static subStaticPublicMethod() {
-    return super.baseStaticPublicMethod();
+class Ex34_Sub extends Ex34_Base {
+  static subPublicStaticMethod() {
+    return super.basePublicStaticMethod();
   }
 }
 
-assert(Ex34.subStaticPublicMethod() === 42);
+assert(Ex34_Sub.subPublicStaticMethod() === 42);
 {% endhighlight %}
 
 ### Private static fields
@@ -757,35 +901,56 @@ Private static fields are added to the class constructor at class evaluation tim
 
 {% highlight js %}
 class Ex35 {
-  static #STATIC_PRIVATE_FIELD;
+  static #PRIVATE_STATIC_FIELD;
 
-  static staticPublicMethod() {
-    Ex35.#STATIC_PRIVATE_FIELD = 42;
-    return Ex35.#STATIC_PRIVATE_FIELD;
+  static publicStaticMethod() {
+    Ex35.#PRIVATE_STATIC_FIELD = 42;
+    return Ex35.#PRIVATE_STATIC_FIELD;
   }
 }
 
-assert(Ex35.staticPublicMethod() === 42);
+assert(Ex35.publicStaticMethod() === 42);
 {% endhighlight %}
 
 * * *
 
 <a class="permanchor"></a>
-The provenance restriction of static private fields restricts access to the class constructor. The following throws because the `this` value of `baseStaticPublicMethod` is the subclass constructor, which does not have the `#BASE_STATIC_PRIVATE_FIELD` field. This is the natural result, though unexpected for some, of the composition of the private field provenance restriction with `this` dynamicity.
+The provenance restriction of private static fields restricts access to the class constructor. The following throws because the `this` value of `basePublicStaticMethod` is the subclass constructor, which does not have the `#BASE_PRIVATE_STATIC_FIELD` field. This is the natural result, though unexpected for some, of the composition of the private field provenance restriction with `this` dynamicity.
 
+This type of error can be avoided by always using the class constructor as the receiver when accessing private static elements.
+
+<div class="wide">
 {% highlight js %}
 class Ex36_Base {
-  static #BASE_STATIC_PRIVATE_FIELD;
+  static #BASE_PRIVATE_STATIC_FIELD;
 
-  static baseStaticPublicMethod() {
-    return this.#BASE_STATIC_PRIVATE_FIELD;
+  static basePublicStaticMethod() {
+    return this.#BASE_PRIVATE_STATIC_FIELD;
   }
 }
 
 class Ex36_Sub extends Ex36_Base { }
 
-assertThrows(() => Ex36_Sub.baseStaticPublicMethod(), TypeError);
+assertThrows(() => Ex36_Sub.basePublicStaticMethod(), TypeError);
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex36_Base {
+  static #BASE_PRIVATE_STATIC_FIELD;
+
+  static basePublicStaticMethod() {
+    return this.#BASE_PRIVATE_STATIC_FIELD;
+  }
+}
+
+class Ex36_Sub extends Ex36_Base { }
+
+assertThrows(() => Ex36_Sub.basePublicStaticMethod(),
+             TypeError);
+{% endhighlight %}
+</div>
 
 ### Private static methods
 
@@ -796,18 +961,36 @@ These methods are specified as non-writable private fields of class constructors
 
 Like all methods, generator function, async function, async generator function, getter, and setter forms are accepted.
 
+<div class="wide">
 {% highlight js %}
 class Ex37 {
-  static #staticPrivateMethod() { return 42; }
+  static #privateStaticMethod() { return 42; }
 
   constructor() {
-    assertThrows(Ex37.#staticPrivateMethod = null, TypeError);
-    assert(Ex37.#staticPrivateMethod(), 42);
+    assertThrows(() => Ex37.#privateStaticMethod = null, TypeError);
+    assert(Ex37.#privateStaticMethod() === 42);
   }
 }
 
 new Ex37;
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex37 {
+  static #privateStaticMethod() { return 42; }
+
+  constructor() {
+    assertThrows(() => Ex37.#privateStaticMethod = null,
+                 TypeError);
+    assert(Ex37.#privateStaticMethod() === 42);
+  }
+}
+
+new Ex37;
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -816,12 +999,12 @@ Like public static methods, `super` references the superclass constructor.
 
 {% highlight js %}
 class Ex38_Base {
-  static baseStaticPublicMethod() { return 42; }
+  static basePublicStaticMethod() { return 42; }
 }
 
 class Ex38_Sub extends Ex38_Base {
   static #subStaticPrivateMethod() {
-    assert(super.baseStaticPublicMethod() === 42);
+    assert(super.basePublicStaticMethod() === 42);
   }
 }
 
@@ -833,19 +1016,36 @@ new Ex38_Sub;
 Static fields may have in-situ initializers. Like instance field initializers, they are also run in declaration order, and the expressions are specified as bodies of non-observable static methods.
 
 <a class="permanchor"></a>
-As initializers expressions are specified as static method bodies, `super` also references the superclass constructor.
+As initializers expressions are specified as static method bodies, `super` references the superclass constructor.
 
+<div class="wide">
 {% highlight js %}
 class Ex39_Base {
-  static baseStaticPublicMethod() { return 42; }
+  static basePublicStaticMethod() { return 42; }
 }
 
 class Ex39_Sub extends Ex39_Base {
-  static SUB_STATIC_PUBLIC_FIELD = super.baseStaticMethod();
+  static SUB_PUBLIC_STATIC_FIELD = super.basePublicStaticMethod();
 }
 
-assert(Ex39_Sub.SUB_STATIC_PUBLIC_FIELD === 42);
+assert(Ex39_Sub.SUB_PUBLIC_STATIC_FIELD === 42);
 {% endhighlight %}
+</div>
+
+<div class="narrow">
+{% highlight js %}
+class Ex39_Base {
+  static basePublicStaticMethod() { return 42; }
+}
+
+class Ex39_Sub extends Ex39_Base {
+  static SUB_PUBLIC_STATIC_FIELD =
+    super.basePublicStaticMethod();
+}
+
+assert(Ex39_Sub.SUB_PUBLIC_STATIC_FIELD === 42);
+{% endhighlight %}
+</div>
 
 * * *
 
@@ -854,11 +1054,11 @@ By the time static field initializers are evaluated, the class name binding insi
 
 {% highlight js %}
 class Ex40 {
-  static #STATIC_PRIVATE_FIELD = 42;
-  static STATIC_PUBLIC_FIELD = Ex40.#STATIC_PRIVATE_FIELD;
+  static #PRIVATE_STATIC_FIELD = 42;
+  static PUBLIC_STATIC_FIELD = Ex40.#PRIVATE_STATIC_FIELD;
 }
 
-assert(Ex40.STATIC_PUBLIC_FIELD === 42);
+assert(Ex40.PUBLIC_STATIC_FIELD === 42);
 {% endhighlight %}
 
 ## Some Take Aways
@@ -873,7 +1073,11 @@ and
 <span style="font-variant: small-caps; font-size: 150%">private fields have a provenance restriction</span>
 </div>
 
-### Specification Footnotes
+## Acknowledgments
+
+I would like to thank [Dan Ehrenberg](https://twitter.com/littledan) for tireless championing of the class features and help editing this article, and [Rob Palmer](https://twitter.com/robpalmer2) for proofing and suggestions.
+
+## Specification Footnotes
 
 <a href="#tdz-use" id="tdz">(*)</a> In subclass constructors, `this` is in the TDZ (temporal dead zone) until `super()` returns.
 
