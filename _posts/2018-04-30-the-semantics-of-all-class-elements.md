@@ -230,7 +230,7 @@ Classes may declare private fields accessible on base class or subclass instance
 <a class="permanchor"></a>
 Private instance fields are declared with **<span style="font-family: bold 16px 'Cousine', monospace">#</span> names** (said "hash names"), identifiers that are prefixed with `#`. Though a different character, this follows the convention of signaling privacy with `_`-prefixed property names.
 
-<span style="font-variant: small-caps; font-size: 200%; float: left; font-weight: bold; margin-right: 0.4em; vertical-align: top; position: relative; top: -0.25em"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>with encapsulation being enforced by the language instead of by convention. `#` is part of the name itself and is used in both in declaration and access.
+<span style="font-variant: small-caps; font-size: 200%; float: left; margin-right: 0.4em; line-height: 48px"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>with encapsulation being enforced by the language instead of by convention. `#` is part of the name itself and is used in both in declaration and access.
 
 {% highlight js %}
 class Ex9 {
