@@ -271,7 +271,7 @@ a.permanchor:before {
     content: '§';
 }
 
-@media (hover: hover) {
+@media (hover: hover), (-moz-touch-enabled: 0) {
     a {
         color: black;
         outline: none;
@@ -296,7 +296,7 @@ a.permanchor:before {
     }
 }
 
-@media (hover: none) {
+@media (hover: none), (-moz-touch-enabled: 1) {
     body#idx a {
         color: black;
     }
