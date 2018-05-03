@@ -434,10 +434,10 @@ assert(ex8.subPublicMethod() === 42);
 Classes may declare private fields accessible on base class or subclass instances from inside the lexical scope of the class declaration itself.
 
 <a class="permanchor"></a>
-Private instance fields are declared with **<span style="font-family: bold 16px 'Cousine', monospace">#</span> names** (said "hash names"), identifiers that are prefixed with `#`. Though a different character, this follows the convention of signaling privacy with `_`-prefixed property names.
+Private instance fields are declared with **`#` names** (said "hash names"), identifiers that are prefixed with `#`. Though a different character, this follows the convention of signaling privacy with `_`-prefixed property names.
 
 <div class="wide">
-<span style="font-variant: small-caps; font-size: 200%; float: left; margin-right: 0.4em; line-height: 48px"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>with encapsulation being enforced by the language instead of by convention. `#` is part of the name itself and is used in both in declaration and access.
+<span style="font-variant: small-caps; font-size: 200%; float: left; margin-right: 0.4em; line-height: 48px"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>with encapsulation being enforced by the language instead of by convention. <code>#</code> is part of the name itself and is used in both in declaration and access.
 
 {% highlight js %}
 class Ex9 {
@@ -455,7 +455,7 @@ new Ex9;
 <div class="narrow">
 <center><span style="font-variant: small-caps; font-size: 200%; margin-right: 0.4em;"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>,</center>
 
-with encapsulation being enforced by the language instead of by convention. `#` is part of the name itself and is used in both in declaration and access.
+with encapsulation being enforced by the language instead of by convention. <code>#</code> is part of the name itself and is used in both in declaration and access.
 
 {% highlight js %}
 class Ex9 {
@@ -1748,14 +1748,20 @@ assert(
 
 We've explored the semantics of all JavaScript class elements. Perhaps some semantics were surprising, while others were expected. I believe a common source of mismatched intuition for private fields is the provenance restriction on `#` names, and I hope this article was helpful in making this clearer. In closing, I offer these two aphorisms.<img id="seal" src="{{ site.baseurl }}/seal.svg" alt="seal">
 
-<div style="text-align: center">
+<div class="takeaways">
 <style scoped>
+.takeaways {
+    text-align: center;
+}
 .takeaway {
     font-variant: small-caps;
     font-size: 150%;
 }
 
 @media (max-width: 1066px) {
+    .takeaways {
+        margin: 1em 0;
+    }
     .takeaway {
         line-height: 14px;
     }
