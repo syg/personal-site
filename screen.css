@@ -43,28 +43,7 @@
 }
 
 @media (min-width: 320px) {
-    nav > a + a {
-        margin-left: 4em;
-    }
 
-    span#name {
-        font: 64px "Lato", serif;
-        margin-top: 100px;
-    }
-
-    section, nav, div#post {
-        font: 20px/1.5 "Crimson", serif;
-        margin-left: 1em;
-        margin-right: 1em;
-        -webkit-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
-        -moz-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
-        -o-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
-        font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
-    }
-
-    code {
-        font: 16px/1.35 "Cousine", monospace;
-    }
 }
 
 @media (min-width: 1066px) {
@@ -126,6 +105,33 @@ body {
 }
 
 @media (max-width: 1066px) {
+    nav > a + a {
+        margin-left: 4em;
+    }
+
+    span#name {
+        font: 64px "Lato", serif;
+        margin-top: 100px;
+    }
+
+    section, nav, div#post {
+        font: 20px/1.5 "Crimson", serif;
+        margin-left: 1em;
+        margin-right: 1em;
+        -webkit-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        -moz-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        -o-font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+        font-feature-settings: 'liga' 1, 'onum' 0, 'kern' 1;
+    }
+
+    code {
+        font: 16px/1.35 "Cousine", monospace;
+    }
+
+    pre code {
+        font: 14px "Cousine", monospace;
+    }
+
     body#post {
         max-width: 800px;
     }
@@ -153,8 +159,9 @@ body {
 
     figure {
         background-color: #e3e0e0;
-        margin: 0.25em 0;
-        padding: 0.25em 20px;
+        margin: 0;
+        padding: 0.1em 20px;
+        line-height: 1em;
     }
 }
 
@@ -385,11 +392,6 @@ pre.dense {
     margin-bottom: 16px;
     margin-left: 1.5em;
     font: 16px/1 "Cousine", monospace;
-}
-
-pre {
-    margin: 0;
-    font: 16px/1.5 "Cousine", monospace;
 }
 
 span.button {
