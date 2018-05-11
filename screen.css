@@ -156,7 +156,7 @@ body {
     figure {
         background-color: #e3e0e0;
         margin: 0;
-        padding: 0.1em 20px;
+        padding: 0.1em 10px;
         line-height: 1em;
     }
 }
@@ -425,7 +425,7 @@ table {
     border-bottom: 1px solid #999;
 }
 
-tbody tr:nth-child(even) {
+tbody.colors tr:nth-child(even) {
     background-color: #e3e0e0;
 }
 

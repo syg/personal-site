@@ -189,7 +189,7 @@ class Ex3_ReturnTrickBase {
   trickyBasePublicField;
 
   constructor() {
-    return new Base;
+    return new Ex3_Base;
   }
 }
 
@@ -219,7 +219,7 @@ class Ex3_ReturnTrickBase {
  trickyBasePublicField;
 
  constructor() {
-  return new Base;
+  return new Ex3_Base;
  }
 }
 
@@ -348,9 +348,10 @@ class Ex6 {
 <div class="narrow">
 {% highlight js %}
 class Ex6 {
- *publicGenMethod() { }
+ *publicGeneratorMethod() { }
  async publicAsyncMethod() { }
- async *publicAsyncGenMethod() { }
+ async *publicAsyncGeneratorMethod()
+ { }
 }
 {% endhighlight %}
 </div>
@@ -436,9 +437,11 @@ Classes may declare private fields accessible on base class or subclass instance
 <a class="permanchor"></a>
 Private instance fields are declared with **`#` names** (said "hash names"), identifiers that are prefixed with `#`. Though a different character, this follows the convention of signaling privacy with `_`-prefixed property names.
 
-<div class="wide">
-<span style="font-variant: small-caps; font-size: 200%; float: left; margin-right: 0.4em; line-height: 48px"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>with encapsulation being enforced by the language instead of by convention. <code>#</code> is part of the name itself and is used in both in declaration and access.
+<center><span style="font-variant: small-caps; font-size: 150%; margin-right: 0.4em;"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>,</center>
 
+with encapsulation being enforced by the language instead of by convention. <code>#</code> is part of the name itself and is used in both in declaration and access.
+
+<div class="wide">
 {% highlight js %}
 class Ex9 {
   #privateField;
@@ -453,10 +456,6 @@ new Ex9;
 </div>
 
 <div class="narrow">
-<center><span style="font-variant: small-caps; font-size: 200%; margin-right: 0.4em;"><span style="font: bold 75% 'Cousine', monospace">#</span> is the new <span style="font: bold 75% 'Cousine', monospace">_</span></span>,</center>
-
-with encapsulation being enforced by the language instead of by convention. <code>#</code> is part of the name itself and is used in both in declaration and access.
-
 {% highlight js %}
 class Ex9 {
  #privateField;
@@ -905,9 +904,10 @@ class Ex19 {
 <div class="narrow">
 {% highlight js %}
 class Ex19 {
- *#privateGenMethod() { }
+ *#privateGeneratorMethod() { }
  async #privateAsyncMethod() { }
- async *#privateAsyncGenMethod() { }
+ async *#privateAsyncGeneratorMethod()
+ { }
 }
 {% endhighlight %}
 </div>
@@ -1416,12 +1416,10 @@ assert(
 
 ### Public static methods
 
-Public static methods are declared function forms and, like public static fields, are also accessible as properties on the class constructor.
+Public static methods are declared function forms and, like public static fields, are also accessible as properties on the class constructor. Also like public instance methods, generator function, async function, async generator function, getter, and setter forms are accepted.
 
 <a class="permanchor"></a>
 These methods are added to the class constructor with `Object.defineProperty` at class evaluation time. Like public instance methods, they are writable, non-enumerable, and configurable.
-
-Also like public instance methods, generator function, async function, async generator function, getter, and setter forms are accepted.
 
 <div class="wide">
 {% highlight js %}
@@ -1679,12 +1677,15 @@ Ex38_Sub.check();
 
 Static fields may have in-situ initializers. Like instance field initializers, they are also run in declaration order, and the expressions are specified as bodies of non-observable static methods.
 
+Like instance field initializers, static methods are added before any initializer is run, so all static methods are available in static field initializers.
+
 <a class="permanchor"></a>
-As initializers expressions are specified as static method bodies, `super` references the superclass constructor.
+As initializer expressions are specified as static method bodies, `super` references the superclass constructor, and `this` references the class constructor.
 
 <div class="wide">
 {% highlight js %}
 class Ex39_Base {
+  static BASE_PUBLIC_STATIC_FIELD = this;
   static basePublicStaticMethod() { return 42; }
 }
 
@@ -1692,6 +1693,7 @@ class Ex39_Sub extends Ex39_Base {
   static SUB_PUBLIC_STATIC_FIELD = super.basePublicStaticMethod();
 }
 
+assert(Ex39_Sub.BASE_PUBLIC_STATIC_FIELD === Ex39_Base);
 assert(Ex39_Sub.SUB_PUBLIC_STATIC_FIELD === 42);
 {% endhighlight %}
 </div>
@@ -1699,6 +1701,8 @@ assert(Ex39_Sub.SUB_PUBLIC_STATIC_FIELD === 42);
 <div class="narrow">
 {% highlight js %}
 class Ex39_Base {
+ static BASE_PUBLIC_STATIC_FIELD =
+  this;
  static basePublicStaticMethod() {
   return 42;
  }
@@ -1709,6 +1713,9 @@ class Ex39_Sub extends Ex39_Base {
   super.basePublicStaticMethod();
 }
 
+assert(
+ Ex39_Sub.BASE_PUBLIC_STATIC_FIELD ===
+ Ex39_Base);
 assert(
  Ex39_Sub.SUB_PUBLIC_STATIC_FIELD ===
  42);
@@ -1781,6 +1788,8 @@ I would like to thank [Dan Ehrenberg](https://twitter.com/littledan) for tireles
 ## Edits
 
 1. <span class="onum">2 May, 2018</span> &mdash; Corrected example 38; reformatted to read better on mobile.
+1. <span class="onum">3 May, 2018</span> &mdash; Added `this` semantics to example 39.
+1. <span class="onum">4 May, 2018</span> &mdash; Corrected example 3. (From [Thomas Chetwin](https://twitter.com/TChetwin))
 
 ## Specification Footnotes
 
